@@ -5,7 +5,7 @@ import pickle, h5py, time, argparse, itertools, datetime
 import torch
 import torch.nn as nn
 import torch.utils.data
-from dataset import SynapseDataset, collate_fn_test
+from libs import SynapseDataset, collate_fn_test
 
 def get_args():
     parser = argparse.ArgumentParser(description='Testing Model')
