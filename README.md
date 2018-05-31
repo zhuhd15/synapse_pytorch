@@ -1,6 +1,11 @@
 
 # Synaptic Clefts Detection in EM images
 
+This repository is a re-implementation of [Synapse-unet](https://github.com/zudi-lin/synapse-unet) for synaptic cleft detection from electron microscopy (EM) images using PyTorch. However, it contains some enhancements:
+
+* Add residual blocks to orginal unet.
+* Change concatenation to summation.
+
 ----------------------------
 
 ## Dataset
