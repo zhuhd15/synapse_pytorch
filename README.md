@@ -21,7 +21,7 @@ Training and testing data comes from MICCAI Challenge on Circuit Reconstruction 
 ### Command
 
 * Activate previously created conda environment : `source activate ins-seg-pytorch`.
-* Run 'train.py'.
+* Run 'CUDA_VISIBLE_DEVICES=xx train.py'.
 
 ```
 usage: train.py [-h] [-t TRAIN] [-dn IMG_NAME] [-ln SEG_NAME] [-o OUTPUT]
@@ -32,32 +32,20 @@ usage: train.py [-h] [-t TRAIN] [-dn IMG_NAME] [-ln SEG_NAME] [-o OUTPUT]
 Training Synapse Detection Model
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -t TRAIN, --train TRAIN
-                        Input folder (train)
-  -dn IMG_NAME, --img-name IMG_NAME
-                        Image data path
-  -ln SEG_NAME, --seg-name SEG_NAME
-                        Ground-truth label path
-  -o OUTPUT, --output OUTPUT
-                        Output path
-  -mi MODEL_INPUT, --model-input MODEL_INPUT
-                        I/O size of deep network
-  -ft FINETUNE, --finetune FINETUNE
-                        Fine-tune on previous model [Default: False]
-  -pm PRE_MODEL, --pre-model PRE_MODEL
-                        Pre-trained model path
-  -lr LR                Learning rate
-  --volume-total VOLUME_TOTAL
-                        Total number of iteration
-  --volume-save VOLUME_SAVE
-                        Number of iteration to save
-  -g NUM_GPU, --num-gpu NUM_GPU
-                        Number of gpu
-  -c NUM_CPU, --num-cpu NUM_CPU
-                        Number of cpu
-  -b BATCH_SIZE, --batch-size BATCH_SIZE
-                        Batch size
+  -h, --help                Show this help message and exit
+  -t, --train               Input folder (train)
+  -dn, --img-name           Image data path
+  -ln, --seg-name           Ground-truth label path
+  -o, --output              Output path
+  -mi, --model-input        I/O size of deep network
+  -ft, --finetune           Fine-tune on previous model [Default: False]
+  -pm, --pre-model          Pre-trained model path
+  -lr                       Learning rate
+  --volume-total            Total number of iteration
+  --volume-save             Number of iteration to save
+  -g, --num-gpu             Number of GPUs
+  -c, --num-cpu             Number of CPUs
+  -b, --batch-size          Batch size
 ```
 ### Visulazation
 * Visualize the training loss using [tensorboardX](https://github.com/lanpa/tensorboard-pytorch).
