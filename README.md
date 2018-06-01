@@ -1,17 +1,18 @@
 
 # Synaptic Clefts Detection in EM images
 
-This repository is a re-implementation of [Synapse-unet](https://github.com/zudi-lin/synapse-unet) for synaptic cleft detection from electron microscopy (EM) images using PyTorch. However, it contains some enhancements of the original model:
+This repository is a re-implementation of [Synapse-unet](https://github.com/zudi-lin/synapse-unet) (in Keras) for synaptic clefts detection in electron microscopy (EM) images using PyTorch. However, it contains some enhancements of the original model:
 
 * Add residual blocks to orginal unet.
-* Change concatenation to summation.
+* Change concatenation to summation in the expansion path.
 
 ----------------------------
 
 ## Installation
 
-* Clone this repository : 'git clone --recursive https://github.com/zudi-lin/synapse_pytorch.git'
-* Create a conda environment :  `conda env create -f synapse_pytorch/envs/py3_pytorch.yml'
+* Clone this repository : `git clone --recursive https://github.com/zudi-lin/synapse_pytorch.git`
+* Create a conda environment :  `conda env create -f synapse_pytorch/envs/py3_pytorch.yml`
+
 ## Dataset
 
 Training and testing data comes from MICCAI Challenge on Circuit Reconstruction from Electron Microscopy Images ([CREMI challenge](https://cremi.org)). Three training volumes of adult *Drosophila melanogaster* brain imaged with serial section Transmission Electron Microscopy (ssTEM) are provided.
@@ -21,7 +22,7 @@ Training and testing data comes from MICCAI Challenge on Circuit Reconstruction 
 ### Command
 
 * Activate previously created conda environment : `source activate ins-seg-pytorch`.
-* Run 'train.py'.
+* Run `train.py`.
 
 ```
 usage: train.py [-h] [-t TRAIN] [-dn IMG_NAME] [-ln SEG_NAME] [-o OUTPUT]
@@ -63,3 +64,5 @@ The script supports datasets from multiple directories.
 * Add augmentation.
 * Add auxiliary boundary detection.
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/zudi-lin/synapse_pytorch/blob/master/LICENSE) file for details.
