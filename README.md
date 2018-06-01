@@ -20,10 +20,10 @@ Training and testing data comes from MICCAI Challenge on Circuit Reconstruction 
 
 ### Command
 
-* Activate previously created conda environment : `source activate ins-seg-pytorch`
-* Run 'train.py'
+* Activate previously created conda environment : `source activate ins-seg-pytorch`.
+* Run 'train.py'.
 
-'''
+```
 usage: train.py [-h] [-t TRAIN] [-dn IMG_NAME] [-ln SEG_NAME] [-o OUTPUT]
                 [-mi MODEL_INPUT] [-ft FINETUNE] [-pm PRE_MODEL] [-lr LR]
                 [--volume-total VOLUME_TOTAL] [--volume-save VOLUME_SAVE]
@@ -58,7 +58,7 @@ optional arguments:
                         Number of cpu
   -b BATCH_SIZE, --batch-size BATCH_SIZE
                         Batch size
-'''
+```
 ### Visulazation
 * Visualize the training loss using [tensorboardX](https://github.com/lanpa/tensorboard-pytorch).
 * Use TensorBoard with `tensorboard --logdir runs`  (needs to install TensorFlow).
