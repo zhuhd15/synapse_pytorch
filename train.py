@@ -26,7 +26,12 @@ def get_args():
                         help='segmentation label')
     parser.add_argument('-o','--output', default='result/train/',
                         help='output path')
-    parser.add_argument('-mi','--model-input', type=str,  default='31,204,204')
+    parser.add_argument('-mi','--model-input', type=str,  default='31,204,204',
+                        help='i/o size of cnn')
+    parser.add_argument('-ft','--finetune', default=False,
+                        help='fine-tune on previous model')
+    parser.add_argument('-pm','--pre-model', type=str, default='',
+                        help='pre-trained model path')                  
 
     # optimization option
     parser.add_argument('-lr', type=float, default=0.0001,
@@ -161,7 +166,11 @@ def main():
     train_loader = get_input(args, model_io_size, 'train')
 
     print('2. setup model')
-    model = res_unet()
+    if args.finetune == False:
+        model = res_unet()
+    else:
+        model = torch.load(args.pre_model)
+        print('fine-tune on previous model')    
     if args.num_gpu>1: model = nn.DataParallel(model, range(args.num_gpu))
     model = model.to(device)
     criterion = WeightedBCELoss()
