@@ -4,6 +4,7 @@ logs/
 runs/
 *.h5
 *.hdf
+*.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

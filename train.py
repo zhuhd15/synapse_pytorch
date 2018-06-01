@@ -1,4 +1,4 @@
-import os, sys
+import os, sys; sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np
 import pickle, h5py, time, argparse, itertools, datetime
 
@@ -14,44 +14,44 @@ from libs import SynapseDataset, collate_fn, WeightedBCELoss, res_unet
 from tensorboardX import SummaryWriter
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Training Model')
+    parser = argparse.ArgumentParser(description='Training Synapse Detection Model')
     # I/O
     parser.add_argument('-t','--train',  default='/n/coxfs01/',
-                        help='input folder (train)')
-    parser.add_argument('-v','--val',  default='',
-                        help='input folder (test)')
+                        help='Input folder (train)')
+    # parser.add_argument('-v','--val',  default='',
+    #                     help='input folder (test)')
     parser.add_argument('-dn','--img-name',  default='im_uint8.h5',
-                        help='image data')
+                        help='Image data path')
     parser.add_argument('-ln','--seg-name',  default='seg-groundtruth2-malis.h5',
-                        help='segmentation label')
+                        help='Ground-truth label path')
     parser.add_argument('-o','--output', default='result/train/',
-                        help='output path')
+                        help='Output path')
     parser.add_argument('-mi','--model-input', type=str,  default='31,204,204',
-                        help='i/o size of cnn')
+                        help='I/O size of deep network')
     parser.add_argument('-ft','--finetune', default=False,
-                        help='fine-tune on previous model')
+                        help='Fine-tune on previous model [Default: False]')
     parser.add_argument('-pm','--pre-model', type=str, default='',
-                        help='pre-trained model path')                  
+                        help='Pre-trained model path')                  
 
     # optimization option
     parser.add_argument('-lr', type=float, default=0.0001,
-                        help='learning rate')
-    parser.add_argument('-lr_decay', default='inv,0.0001,0.75',
-                        help='learning rate decay')
-    parser.add_argument('-betas', default='0.99,0.999',
-                        help='beta for adam')
-    parser.add_argument('-wd', type=float, default=5e-6,
-                        help='weight decay')
+                        help='Learning rate')
+    # parser.add_argument('-lr_decay', default='inv,0.0001,0.75',
+    #                     help='learning rate decay')
+    # parser.add_argument('-betas', default='0.99,0.999',
+    #                     help='beta for adam')
+    # parser.add_argument('-wd', type=float, default=5e-6,
+    #                     help='weight decay')
     parser.add_argument('--volume-total', type=int, default=1000,
-                        help='total number of iteration')
+                        help='Total number of iteration')
     parser.add_argument('--volume-save', type=int, default=100,
-                        help='number of iteration to save')
+                        help='Number of iteration to save')
     parser.add_argument('-g','--num-gpu', type=int,  default=1,
-                        help='number of gpu')
+                        help='Number of gpu')
     parser.add_argument('-c','--num-cpu', type=int,  default=1,
-                        help='number of cpu')
+                        help='Number of cpu')
     parser.add_argument('-b','--batch-size', type=int,  default=1,
-                        help='batch size')
+                        help='Batch size')
     args = parser.parse_args()
     return args
 

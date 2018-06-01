@@ -5,6 +5,7 @@ import pickle, h5py, time, argparse, itertools, datetime
 
 import torch
 import torch.nn as nn
+import torch.utils.data
 
 # -- 0. utils --
 def countVolume(data_sz, vol_sz, stride):
