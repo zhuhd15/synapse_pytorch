@@ -69,12 +69,17 @@ def main():
     args = get_args()
 
     print('0. load data')
-    test = np.array(h5py.File(args.prediction, 'r')['main'])
-    test = test[14:-14, 200:-200, 200:-200]
-    truth = np.array(h5py.File(args.groundtruth, 'r')['main'])
-    truth = truth[14:-14, 200:-200, 200:-200]
+    test = h5py.File(name=args.prediction, mode='r',  libver='latest')['main']
+    test = np.array(test)[14:-14, 200:-200, 200:-200]
+    test = (test!=0).astype(np.uint8)
+
+    truth = h5py.File(name=args.groundtruth, mode='r',  libver='latest')['main']
+    truth = np.array(truth)[14:-14, 200:-200, 200:-200]
+    truth = (truth!=0).astype(np.uint8)
+
     assert (test.shape == truth.shape)
     print('volume shape:', test.shape)
+    print('volume dtype:', test.dtype)
 
     print('1. start evaluation')
 

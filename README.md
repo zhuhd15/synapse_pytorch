@@ -60,6 +60,7 @@ The script supports datasets from multiple directories.
 
 ## TODO
 
+* Finish evaluation
 * Use ELU activation.
 * Add augmentation.
 * Add auxiliary boundary detection.
