@@ -21,7 +21,7 @@ Training and testing data comes from MICCAI Challenge on Circuit Reconstruction 
 ### Command
 
 * Activate previously created conda environment : `source activate ins-seg-pytorch`.
-* Run 'CUDA_VISIBLE_DEVICES=xx train.py'.
+* Run 'train.py'.
 
 ```
 usage: train.py [-h] [-t TRAIN] [-dn IMG_NAME] [-ln SEG_NAME] [-o OUTPUT]
@@ -40,13 +40,16 @@ optional arguments:
   -mi, --model-input        I/O size of deep network
   -ft, --finetune           Fine-tune on previous model [Default: False]
   -pm, --pre-model          Pre-trained model path
-  -lr                       Learning rate
-  --volume-total            Total number of iteration
-  --volume-save             Number of iteration to save
+  -lr                       Learning rate [Default: 0.0001]
+  --volume-total            Total number of iterations
+  --volume-save             Number of iterations to save
   -g, --num-gpu             Number of GPUs
   -c, --num-cpu             Number of CPUs
   -b, --batch-size          Batch size
 ```
+
+The script supports datasets from multiple directories.
+
 ### Visulazation
 * Visualize the training loss using [tensorboardX](https://github.com/lanpa/tensorboard-pytorch).
 * Use TensorBoard with `tensorboard --logdir runs`  (needs to install TensorFlow).
