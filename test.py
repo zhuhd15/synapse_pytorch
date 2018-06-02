@@ -128,10 +128,10 @@ def test(args, test_loader, result, weight, model, device, model_io_size):
 
     for vol_id in range(len(result)):
         result[vol_id] = result[vol_id] / weight[vol_id]
-        data = (result[vol_id]*255).astype(np.uint8)
-        data[data < 128] = 0
+        #data = (result[vol_id]*255).astype(np.uint8)
+        #data[data < 128] = 0
         hf = h5py.File(args.output+'/volume_'+str(vol_id)+'.h5','w')
-        hf.create_dataset('main', data=data)
+        hf.create_dataset('main', data=result[vol_id])
         hf.close()
 
 

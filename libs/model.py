@@ -5,7 +5,7 @@ import torch.nn.functional as F
 
 class res_unet(nn.Module):
     # unet architecture with residual blocks
-    def __init__(self, in_num=1, out_num=1, filters=[32,64,96,128,160], has_BN=True):
+    def __init__(self, in_num=1, out_num=1, filters=[32,64,96,128,160]):
         super(res_unet, self).__init__()
         self.filters = filters 
         self.layer_num = len(filters) # 5
