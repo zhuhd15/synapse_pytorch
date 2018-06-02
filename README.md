@@ -49,7 +49,7 @@ optional arguments:
   -b, --batch-size          Batch size
 ```
 
-The script supports datasets from multiple directories.
+The script supports training on datasets from multiple directories.
 
 ### Visulazation
 * Visualize the training loss using [tensorboardX](https://github.com/lanpa/tensorboard-pytorch).
@@ -58,9 +58,11 @@ The script supports datasets from multiple directories.
 
 ## Evaluation
 
+Run `evaluation.py -p PREDICTION -g GROUND_TRUTH`.
+The evaluation script will count the number of false positive and false negative pixels based on the evaluation metric from [CREMI challenge](https://cremi.org/metrics/). Synaptic clefts IDs are NOT considered in the evaluation matric. The inputs will be converted to binary masks.
+
 ## TODO
 
-* Finish evaluation
 * Use ELU activation.
 * Add augmentation.
 * Add auxiliary boundary detection.
