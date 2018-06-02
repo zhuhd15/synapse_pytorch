@@ -54,6 +54,7 @@ The script supports training on datasets from multiple directories.
 ### Visulazation
 * Visualize the training loss using [tensorboardX](https://github.com/lanpa/tensorboard-pytorch).
 * Use TensorBoard with `tensorboard --logdir runs`  (needs to install TensorFlow).
+
 ## Prediction
 
 ## Evaluation
