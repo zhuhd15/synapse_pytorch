@@ -49,7 +49,7 @@ optional arguments:
   -b, --batch-size          Batch size
 ```
 
-The script supports training on datasets from multiple directories.
+The script supports training on datasets from multiple directories. Please make sure that the input dimension is in *zyx*.
 
 ### Visulazation
 * Visualize the training loss using [tensorboardX](https://github.com/lanpa/tensorboard-pytorch).

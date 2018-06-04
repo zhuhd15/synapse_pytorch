@@ -63,6 +63,7 @@ def get_input(args, model_io_size, opt='test'):
     # original image is in [0, 255], normalize to [0, 1]
     for i in range(len(img_name)):
         test_input[i] = np.array(h5py.File(img_name[i], 'r')['main'])/255.0
+        # test_input[i] = np.transpose(test_input[i], (2,0,1))
         print("volume shape: ", test_input[i].shape)
         result[i] = np.zeros(test_input[i].shape)
         weight[i] = np.zeros(test_input[i].shape)
@@ -148,6 +149,7 @@ def main():
     print('2. setup model')
     print(args.model)
     model = torch.load(args.model)
+    # still some problems in multi-gpu testing
     if args.num_gpu>1: model = nn.DataParallel(model, range(args.num_gpu))
     model = model.to(device)
 
