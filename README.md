@@ -11,6 +11,7 @@ This repository is a re-implementation of [Synapse-unet](https://github.com/zudi
 ## Installation
 
 * Clone this repository : `git clone --recursive https://github.com/zudi-lin/synapse_pytorch.git`
+Download and install [Anaconda](https://www.anaconda.com/download/) (Python 3.6 version).
 * Create a conda environment :  `conda env create -f synapse_pytorch/envs/py3_pytorch.yml`
 
 ## Dataset
