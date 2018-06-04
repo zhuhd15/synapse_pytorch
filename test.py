@@ -5,7 +5,7 @@ import pickle, h5py, time, argparse, itertools, datetime
 import torch
 import torch.nn as nn
 import torch.utils.data
-from libs import SynapseDataset, collate_fn_test
+from libs import SynapseDataset, collate_fn_test, res_unet
 
 def get_args():
     parser = argparse.ArgumentParser(description='Testing Model')
@@ -148,7 +148,9 @@ def main():
 
     print('2. setup model')
     print(args.model)
-    model = torch.load(args.model)
+    model = res_unet()
+    model.load_state_dict(torch.load(args.pre_model))
+    # model = torch.load(args.model)
     # still some problems in multi-gpu testing
     if args.num_gpu>1: model = nn.DataParallel(model, range(args.num_gpu))
     model = model.to(device)

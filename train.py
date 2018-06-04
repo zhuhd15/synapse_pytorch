@@ -150,7 +150,7 @@ def train(args, train_loader, model, device, criterion, optimizer, logger, write
             #decay_lr(optimizer, args.lr, volume_id, lr_decay[0], lr_decay[1], lr_decay[2])
         
         if volume_id % args.volume_save < args.batch_size or volume_id >= args.volume_total:
-            torch.save(model, args.output+('/volume_%d.pth' % (volume_id)))
+            torch.save(model.state_dict(), args.output+('/volume_%d.pth' % (volume_id)))
         # Terminate
         if volume_id >= args.volume_total:
             break    #     
@@ -166,11 +166,11 @@ def main():
     train_loader = get_input(args, model_io_size, 'train')
 
     print('2. setup model')
-    if args.finetune == False:
-        model = res_unet()
-    else:
-        model = torch.load(args.pre_model)
-        print('fine-tune on previous model')    
+    model = res_unet()
+    if args.finetune == True:
+        model.load_state_dict(torch.load(args.pre_model))
+        print('fine-tune on previous model')
+            
     if args.num_gpu>1: model = nn.DataParallel(model, range(args.num_gpu))
     model = model.to(device)
     criterion = WeightedBCELoss()
