@@ -74,14 +74,18 @@ class res_unet_IsoBlock(nn.Module):
         self.block1 = nn.Sequential(
             nn.Conv3d(in_planes,  out_planes, kernel_size=(3,3,3), stride=1, padding=(1,1,1), bias=False),
             nn.BatchNorm3d(out_planes),
-            nn.ReLU(inplace=True))
+            #nn.ReLU(inplace=True)
+            nn.Elu(alpha=1, inplace=True)
+            )
         self.block2 = nn.Sequential(
             nn.Conv3d(out_planes, out_planes, kernel_size=(3,3,3), stride=1, padding=(1,1,1), bias=False),
             nn.BatchNorm3d(out_planes),
-            nn.ReLU(inplace=True),
+            #nn.ReLU(inplace=True),
+            nn.Elu(alpha=1, inplace=True),            
             nn.Conv3d(out_planes, out_planes, kernel_size=(3,3,3), stride=1, padding=(1,1,1), bias=False),
             nn.BatchNorm3d(out_planes))
-        self.block3 = nn.ReLU(inplace=True)    
+        #self.block3 = nn.ReLU(inplace=True)    
+        self.block3 = nn.Elu(alpha=1, inplace=True)
 
     def forward(self, x):
         residual  = self.block1(x)
