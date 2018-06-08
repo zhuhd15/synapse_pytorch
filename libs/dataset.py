@@ -7,6 +7,9 @@ import torch
 import torch.nn as nn
 import torch.utils.data
 
+import torchvision.transforms as transforms
+import torchsample as ts
+
 # -- 0. utils --
 def countVolume(data_sz, vol_sz, stride):
     return 1 + np.ceil((data_sz - vol_sz) / stride.astype(float)).astype(int)
@@ -49,6 +52,7 @@ class SynapseDataset(torch.utils.data.Dataset):
         self.sample_num_c = np.cumsum([0] + list(self.sample_num))
         #print(self.sample_num_c)
         assert self.sample_num_c[-1] == self.sample_num_a
+        self.aug_operation_id = 0
 
         # for test
         self.sample_size_vol = [np.array([np.prod(x[1:3]),x[2]]) for x in self.sample_size]
@@ -70,8 +74,11 @@ class SynapseDataset(torch.utils.data.Dataset):
             out_label = cropVolume(self.label[pos[0]], vol_size, pos[1:])
 
             # 3. augmentation
-            # if self.data_aug is not None: # augmentation
-            #     out_input, out_label = self.data_aug.augment(out_input, out_label)
+            if self.data_aug is not None: # augmentation
+                out_input, out_label = self.data_aug(out_input, out_label,self.aug_operation_id)
+                self.aug_operation_id += 1
+                if self.aug_operation_id == 6:
+                    self.aug_operation_id = 0
 
             # 4. class weight
             # add weight to classes to handle data imbalance
@@ -162,3 +169,25 @@ def collate_fn_test(batch):
     test_sample = torch.stack(out_input, 0)
 
     return pos, test_sample    
+
+
+# -- 3. data augmentation --
+def data_augmentation(out_input,out_label,aug_operation_id):
+    # do augmentation according to the iteration.
+    input_size = np.shape(out_input)
+    tmp_data = np.zeros((input_size[1],input_size[2]))
+    tmp_label = np.zeros((input_size[1],input_size[2]))
+    k = aug_operation_id % 6
+    if k < 4:
+        return data.append(np.rot90(out_input,k,axes=(1,2))),label.append(np.rot90(out_label,k,axes=(1,2)))
+    elif k == 4:
+        for i in range(input_size[0]):
+            tmp_data[i,:,:] = np.fliplr(out_input[i,:,:])
+            tmp_label[i,:,:] = np.fliplr(out_label[i,:,:])
+        return tmp_data,tmp_label
+    else:
+        for i in range(input_size[0]):
+            tmp_data[i,:,:] = np.flipud(out_input[i,:,:])
+            tmp_label[i,:,:] = np.flipud(out_label[i,:,:])
+        return tmp_data,tmp_label
+
